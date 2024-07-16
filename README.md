@@ -13,6 +13,7 @@ Interaction with the application is performed using REST API.
     * Name
     * Description
     * Location
+    * Employees
 * Employee
     * Identifier
     * First name
@@ -21,8 +22,6 @@ Interaction with the application is performed using REST API.
     * Job title
     * Email
     * Phone
-    * Salary
-    * Hire date
     * Department
 
 ### Relationships:
