@@ -29,6 +29,8 @@ Interaction with the application is performed using REST API.
 * A Department can have multiple Employees working on it.
 * An Employee can only work in one Department.
 
+![](docs\database-structure.png)
+
 ### Endpoints
 
 * #### Departments
