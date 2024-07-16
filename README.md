@@ -27,7 +27,7 @@ Interaction with the application is performed using REST API.
 
 ### Relationships:
 
-* A Department can have multiple Employee's working in it.
+* A Department can have multiple Employees working on it.
 * An Employee can only work in one Department.
 
 ### Endpoints
@@ -50,9 +50,9 @@ Interaction with the application is performed using REST API.
 
 * #### Department Employees
 
-  * `GET /departments/{departmentId}/employees` - Retrieve a list of employees in a department
-  * `POST /departments/{departmentId}/employees` - Add an employees to a department
-  * `DELETE /departments/{departmentId/employees/{employeeId}` - Remove an employee from a department
+    * `GET /departments/{departmentId}/employees` - Retrieve a list of employees in a department
+    * `POST /departments/{departmentId}/employees` - Add an employees to a department
+    * `DELETE /departments/{departmentId/employees/{employeeId}` - Remove an employee from a department
 
 ## Used technologies
 
