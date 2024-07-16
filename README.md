@@ -30,6 +30,30 @@ Interaction with the application is performed using REST API.
 * A Department can have multiple Employee's working in it.
 * An Employee can only work in one Department.
 
+### Endpoints
+
+* #### Departments
+
+    * `GET /departments` - Retrieve a list of all departments
+    * `GET /departments/{id}` - Retrieve a department by ID
+    * `POST /departments` - Create a new department
+    * `PUT /departments/{id}` - Update an existing department
+    * `DELETE /departments/{id}` - Delete a department 
+
+* #### Employees
+
+    * `GET /employees` - Retrieve a list of all employees
+    * `GET /employees/{id}` - Retrieve an employee by ID
+    * `POST /employees` - Create a new employee
+    * `PUT /employees/{id}` - Update an existing employee
+    * `DELETE /employees/{id}` - Delete an employee
+
+* #### Department Employees
+
+  * `GET /departments/{departmentId}/employees` - Retrieve a list of employees in a department
+  * `POST /departments/{departmentId}/employees` - Add an employees to a department
+  * `DELETE /departments/{departmentId/employees/{employeeId}` - Remove an employee from a department
+
 ## Used technologies
 
 - Java 17
@@ -37,3 +61,4 @@ Interaction with the application is performed using REST API.
 - Hibernate
 - Maven
 - PostgreSQL
+- Git
