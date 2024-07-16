@@ -80,7 +80,10 @@ public class DefaultDepartmentService implements DepartmentService {
                 .orElseThrow(() -> new DepartmentNotFoundException(departmentId));
 
         Employee employee = employeeService.getEmployeeById(employeeId);
+
         department.getEmployees().add(employee);
+        employee.setDepartment(department);
+        employeeService.createEmployee(employee);
 
         return departmentRepository.save(department);
     }
