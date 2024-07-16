@@ -21,42 +21,42 @@ public class DepartmentController {
 
     @GetMapping
     public List<Department> retrieveAllDepartments() {
-        return null;
+        return departmentService.getAllDepartments();
     }
 
     @GetMapping("/{id}")
     public Department retrieveDepartmentById(@PathVariable Long id) {
-        return null;
+        return departmentService.getDepartmentById(id);
     }
 
     @PostMapping
-    public void createDepartment() {
-
+    public Department createDepartment(@RequestBody Department department) {
+        return departmentService.createDepartment(department);
     }
 
     @PutMapping("/{id}")
-    public void updateDepartment(@PathVariable Long id) {
-
+    public Department updateDepartment(@PathVariable Long id, @RequestBody Department department) {
+        return departmentService.updateDepartment(id, department);
     }
 
     @DeleteMapping("/{id}")
     public void deleteDepartment(@PathVariable Long id) {
-
+        departmentService.deleteDepartment(id);
     }
 
     @GetMapping("/{departmentId}/employees")
-    public List<Employee> retrieveEmployeesByDepartment(@PathVariable Long departmentId) {
-        return null;
+    public List<Employee> retrieveEmployeesByDepartmentId(@PathVariable Long departmentId) {
+        return departmentService.getEmployeesByDepartmentId(departmentId);
     }
 
     @PostMapping("/{departmentId}/employees")
-    public void addEmployeeToDepartment(@PathVariable Long departmentId) {
-
+    public Department addEmployeeToDepartment(@PathVariable Long departmentId, @RequestBody Long employeeId) {
+        return departmentService.addEmployeeToDepartment(departmentId, employeeId);
     }
 
     @DeleteMapping("/{departmentId}/employees/{employeeId}")
-    public void removeEmployeeFromDepartment(@PathVariable Long departmentId, @PathVariable Long employeeId) {
-
+    public Department removeEmployeeFromDepartment(@PathVariable Long departmentId, @PathVariable Long employeeId) {
+        return departmentService.removeEmployeeFromDepartment(departmentId, employeeId);
     }
 
 }
