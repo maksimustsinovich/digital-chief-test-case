@@ -19,7 +19,7 @@ public interface DepartmentService {
 
     List<Employee> getEmployeesByDepartment(Long departmentId);
 
-    void addEmployeeToDepartment(Long departmentId);
+    void addEmployeeToDepartment(Long departmentId, Long employeeId);
 
     void removeEmployeeFromDepartment(Long departmentId, Long employeeId);
 
