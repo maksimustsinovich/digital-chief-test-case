@@ -1,6 +1,7 @@
 package by.ustsinovich.testcase.controller;
 
-import by.ustsinovich.testcase.entity.Employee;
+import by.ustsinovich.testcase.dto.EmployeeDto;
+import by.ustsinovich.testcase.mapper.EmployeeMapper;
 import by.ustsinovich.testcase.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,29 +14,36 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
+    private final EmployeeMapper employeeMapper;
+
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, EmployeeMapper employeeMapper) {
         this.employeeService = employeeService;
+        this.employeeMapper = employeeMapper;
     }
 
     @GetMapping
-    public List<Employee> retrieveAllEmployees() {
-        return employeeService.getAllEmployees();
+    public List<EmployeeDto> retrieveAllEmployees() {
+        return employeeService
+                .getAllEmployees()
+                .stream()
+                .map(employeeMapper::map)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Employee retrieveEmployeeById(@PathVariable Long id) {
-        return employeeService.getEmployeeById(id);
+    public EmployeeDto retrieveEmployeeById(@PathVariable Long id) {
+        return employeeMapper.map(employeeService.getEmployeeById(id));
     }
 
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
+    public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto) {
+        return employeeMapper.map(employeeService.createEmployee(employeeMapper.map(employeeDto)));
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        return employeeService.updateEmployee(id, employee);
+    public EmployeeDto updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto employeeDto) {
+        return employeeMapper.map(employeeService.updateEmployee(id, employeeMapper.map(employeeDto)));
     }
 
     @DeleteMapping("/{id}")
