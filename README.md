@@ -58,6 +58,8 @@ Interaction with the application is performed using REST API.
 
 - Java 17
 - Spring Boot 3.3.1
+  - Spring Data JPA
+  - Spring Web
 - Hibernate
 - Maven
 - PostgreSQL
