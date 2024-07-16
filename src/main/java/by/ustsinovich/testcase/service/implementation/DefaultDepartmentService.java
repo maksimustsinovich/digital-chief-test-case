@@ -6,6 +6,7 @@ import by.ustsinovich.testcase.exception.DepartmentNotFoundException;
 import by.ustsinovich.testcase.repository.DepartmentRepository;
 import by.ustsinovich.testcase.service.DepartmentService;
 import by.ustsinovich.testcase.service.EmployeeService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,11 +39,13 @@ public class DefaultDepartmentService implements DepartmentService {
     }
 
     @Override
+    @Transactional
     public Department createDepartment(Department department) {
         return departmentRepository.save(department);
     }
 
     @Override
+    @Transactional
     public Department updateDepartment(Long id, Department newDepartment) {
         Department department = departmentRepository
                 .findById(id)
@@ -56,6 +59,7 @@ public class DefaultDepartmentService implements DepartmentService {
     }
 
     @Override
+    @Transactional
     public void deleteDepartment(Long id) {
         Department department = departmentRepository
                 .findById(id)
@@ -74,21 +78,26 @@ public class DefaultDepartmentService implements DepartmentService {
     }
 
     @Override
-    public Department addEmployeeToDepartment(Long departmentId, Long employeeId) {
+    @Transactional
+    public Department addEmployeeToDepartment(Long departmentId, List<Long> employeesId) {
         Department department = departmentRepository
                 .findById(departmentId)
                 .orElseThrow(() -> new DepartmentNotFoundException(departmentId));
 
-        Employee employee = employeeService.getEmployeeById(employeeId);
+        List<Employee> employees = employeeService.getEmployeesByIds(employeesId);
 
-        department.getEmployees().add(employee);
-        employee.setDepartment(department);
-        employeeService.createEmployee(employee);
+        employees.forEach(employee -> {
+            department.getEmployees().add(employee);
+            employee.setDepartment(department);
+        });
+
+        employeeService.createAllEmployees(employees);
 
         return departmentRepository.save(department);
     }
 
     @Override
+    @Transactional
     public Department removeEmployeeFromDepartment(Long departmentId, Long employeeId) {
         Department department = departmentRepository
                 .findById(departmentId)

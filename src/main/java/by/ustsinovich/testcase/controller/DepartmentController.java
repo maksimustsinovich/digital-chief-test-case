@@ -66,8 +66,8 @@ public class DepartmentController {
     }
 
     @PostMapping("/{departmentId}/employees")
-    public DepartmentDto addEmployeeToDepartment(@PathVariable Long departmentId, @RequestBody EmployeeDto employeeDto) {
-        return departmentMapper.map(departmentService.addEmployeeToDepartment(departmentId, employeeDto.getId()));
+    public DepartmentDto addEmployeeToDepartments(@PathVariable Long departmentId, @RequestBody List<Long> employeesId) {
+        return departmentMapper.map(departmentService.addEmployeeToDepartment(departmentId, employeesId));
     }
 
     @DeleteMapping("/{departmentId}/employees/{employeeId}")

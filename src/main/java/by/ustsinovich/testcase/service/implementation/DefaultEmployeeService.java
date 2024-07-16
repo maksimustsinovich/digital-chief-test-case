@@ -4,6 +4,7 @@ import by.ustsinovich.testcase.entity.Employee;
 import by.ustsinovich.testcase.exception.EmployeeNotFoundException;
 import by.ustsinovich.testcase.repository.EmployeeRepository;
 import by.ustsinovich.testcase.service.EmployeeService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
+    @Transactional
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
     @Override
+    @Transactional
     public Employee updateEmployee(Long id, Employee newEmployee) {
         Employee employee = employeeRepository
                 .findById(id)
@@ -51,12 +54,24 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
+    @Transactional
     public void deleteEmployee(Long id) {
         Employee employee = employeeRepository
                 .findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
 
         employeeRepository.delete(employee);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByIds(List<Long> ids) {
+        return employeeRepository.findAllById(ids);
+    }
+
+    @Override
+    @Transactional
+    public void createAllEmployees(List<Employee> employees) {
+        employeeRepository.saveAll(employees);
     }
 
 }
