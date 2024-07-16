@@ -19,7 +19,7 @@ public class Department {
 
     private String location;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "department")
     private Set<Employee> employees;
 
     public Department() {
