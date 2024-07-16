@@ -1,5 +1,7 @@
 package by.ustsinovich.testcase.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class EmployeeDto {
 
     private Long id;
@@ -15,6 +17,9 @@ public class EmployeeDto {
     private String phone;
 
     private String jobTitle;
+
+    @JsonBackReference
+    private DepartmentDto department;
 
     public Long getId() {
         return id;
@@ -71,5 +76,13 @@ public class EmployeeDto {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
-    
+
+    public DepartmentDto getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(DepartmentDto department) {
+        this.department = department;
+    }
+
 }
