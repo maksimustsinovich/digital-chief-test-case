@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService) {
@@ -20,27 +20,27 @@ public class EmployeeController {
 
     @GetMapping
     public List<Employee> retrieveAllEmployees() {
-        return null;
+        return employeeService.getAllEmployees();
     }
 
     @GetMapping("/{id}")
     public Employee retrieveEmployeeById(@PathVariable Long id) {
-        return null;
+        return employeeService.getEmployeeById(id);
     }
 
     @PostMapping
-    public void createEmployee() {
-
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
     }
 
     @PutMapping("/{id}")
-    public void updateEmployee(@PathVariable Long id) {
-
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        return employeeService.updateEmployee(id, employee);
     }
 
     @DeleteMapping("/{id}")
     public void deleteEmployee(@PathVariable Long id) {
-
+        employeeService.deleteEmployee(id);
     }
 
 }
