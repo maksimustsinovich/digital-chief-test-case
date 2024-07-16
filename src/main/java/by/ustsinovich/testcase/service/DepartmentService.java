@@ -17,7 +17,7 @@ public interface DepartmentService {
 
     void deleteDepartment(Long id);
 
-    List<Employee> getEmployeesByDepartment(Long departmentId);
+    List<Employee> getEmployeesByDepartmentId(Long departmentId);
 
     Department addEmployeeToDepartment(Long departmentId, Long employeeId);
 

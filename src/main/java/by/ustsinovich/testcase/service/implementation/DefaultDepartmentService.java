@@ -65,7 +65,7 @@ public class DefaultDepartmentService implements DepartmentService {
     }
 
     @Override
-    public List<Employee> getEmployeesByDepartment(Long departmentId) {
+    public List<Employee> getEmployeesByDepartmentId(Long departmentId) {
         Department department = departmentRepository
                 .findById(departmentId)
                 .orElseThrow(() -> new DepartmentNotFoundException(departmentId));
