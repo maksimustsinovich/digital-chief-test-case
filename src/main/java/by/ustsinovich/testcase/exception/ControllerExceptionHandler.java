@@ -1,5 +1,6 @@
 package by.ustsinovich.testcase.exception;
 
+import by.ustsinovich.testcase.dto.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,8 +14,8 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ErrorMessage resourceNotFoundExceptionHandler(ResourceNotFoundException exception, WebRequest request) {
-        return new ErrorMessage(
+    public ErrorResponseDto resourceNotFoundExceptionHandler(ResourceNotFoundException exception, WebRequest request) {
+        return new ErrorResponseDto(
                 HttpStatus.NOT_FOUND,
                 new Date(),
                 exception.getMessage(),
@@ -24,8 +25,8 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorMessage globalExceptionHandler(Exception exception, WebRequest request) {
-        return new ErrorMessage(
+    public ErrorResponseDto globalExceptionHandler(Exception exception, WebRequest request) {
+        return new ErrorResponseDto(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 new Date(),
                 exception.getMessage(),

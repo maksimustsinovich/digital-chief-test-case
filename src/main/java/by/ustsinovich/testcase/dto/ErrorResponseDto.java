@@ -1,10 +1,12 @@
-package by.ustsinovich.testcase.exception;
+package by.ustsinovich.testcase.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
-public class ErrorMessage {
+@Schema(description = "Error")
+public class ErrorResponseDto {
 
     private HttpStatus status;
 
@@ -14,7 +16,7 @@ public class ErrorMessage {
 
     private String description;
 
-    public ErrorMessage(HttpStatus status, Date timestamp, String message, String description) {
+    public ErrorResponseDto(HttpStatus status, Date timestamp, String message, String description) {
         this.status = status;
         this.timestamp = timestamp;
         this.message = message;
