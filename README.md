@@ -63,6 +63,7 @@ Interaction with the application is performed using REST API.
 - Spring Boot 3.3.1
   - Spring Data JPA
   - Spring Web
+  - Spring Validation
 - Swagger
 - Hibernate
 - Maven
