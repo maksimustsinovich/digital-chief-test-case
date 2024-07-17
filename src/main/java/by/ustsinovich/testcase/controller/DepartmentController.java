@@ -8,6 +8,7 @@ import by.ustsinovich.testcase.service.DepartmentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -67,7 +68,7 @@ public class DepartmentController {
     @ApiResponse(responseCode = "400",
             description = "Invalid department data")
     @ResponseStatus(HttpStatus.CREATED)
-    public DepartmentDto createDepartment(@RequestBody DepartmentDto departmentDto) {
+    public DepartmentDto createDepartment(@RequestBody @Valid DepartmentDto departmentDto) {
         return departmentMapper.map(departmentService.createDepartment(departmentMapper.map(departmentDto)));
     }
 
@@ -78,7 +79,7 @@ public class DepartmentController {
             description = "Department updated successfully")
     @ApiResponse(responseCode = "404",
             description = "Department not found")
-    public DepartmentDto updateDepartment(@PathVariable Long id, @RequestBody DepartmentDto departmentDto) {
+    public DepartmentDto updateDepartment(@PathVariable Long id, @RequestBody @Valid DepartmentDto departmentDto) {
         return departmentMapper.map(departmentService.updateDepartment(id, departmentMapper.map(departmentDto)));
     }
 

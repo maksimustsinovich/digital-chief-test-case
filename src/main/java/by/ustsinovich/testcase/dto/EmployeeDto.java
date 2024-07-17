@@ -2,22 +2,32 @@ package by.ustsinovich.testcase.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Schema(description = "Employee")
 public class EmployeeDto {
 
     private Long id;
 
+    @NotBlank(message = "First name is required")
+    @Size(max = 50, message = "First name must be less than 50 characters")
     private String firstName;
 
     private String patronymic;
 
+    @NotBlank(message = "Last name is required")
+    @Size(max = 50, message = "Last name must be less than 50 characters")
     private String lastName;
 
+    @Email(message = "Invalid email address")
     private String email;
 
     private String phone;
 
+    @NotBlank(message = "Job title is required")
+    @Size(max = 50, message = "Job title must be less than 50 characters")
     private String jobTitle;
 
     @JsonBackReference

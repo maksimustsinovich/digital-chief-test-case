@@ -2,6 +2,8 @@ package by.ustsinovich.testcase.dto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -10,10 +12,14 @@ public class DepartmentDto {
 
     private Long id;
 
+    @Size(max = 200, message = "Department description must be less than 200 characters")
     private String description;
 
+    @Size(max = 50, message = "Department location must be less than 50 characters")
     private String location;
 
+    @NotBlank(message = "Department name is required")
+    @Size(max = 50, message = "Department name must be less than 50 characters")
     private String name;
 
     @JsonManagedReference

@@ -6,10 +6,9 @@ import by.ustsinovich.testcase.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,7 +62,7 @@ public class EmployeeController {
     @ApiResponse(responseCode = "400",
             description = "Invalid employee data")
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto) {
+    public EmployeeDto createEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
         return employeeMapper.map(employeeService.createEmployee(employeeMapper.map(employeeDto)));
     }
 
@@ -74,7 +73,7 @@ public class EmployeeController {
             description = "Employee updated successfully")
     @ApiResponse(responseCode = "404",
             description = "Employee not found")
-    public EmployeeDto updateEmployee(@PathVariable Long id, @RequestBody EmployeeDto employeeDto) {
+    public EmployeeDto updateEmployee(@PathVariable Long id, @RequestBody @Valid EmployeeDto employeeDto) {
         return employeeMapper.map(employeeService.updateEmployee(id, employeeMapper.map(employeeDto)));
     }
 
