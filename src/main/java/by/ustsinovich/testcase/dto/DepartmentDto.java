@@ -1,9 +1,11 @@
 package by.ustsinovich.testcase.dto;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
+@Schema(description = "Department")
 public class DepartmentDto {
 
     private Long id;
