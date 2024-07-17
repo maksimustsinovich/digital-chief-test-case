@@ -5,6 +5,7 @@ import by.ustsinovich.testcase.exception.EmployeeNotFoundException;
 import by.ustsinovich.testcase.repository.EmployeeRepository;
 import by.ustsinovich.testcase.service.EmployeeService;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class DefaultEmployeeService implements EmployeeService {
      *
      * @param employeeRepository the EmployeeRepository instance
      */
+    @Autowired
     public DefaultEmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
