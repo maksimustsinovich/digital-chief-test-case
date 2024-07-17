@@ -1,3 +1,6 @@
 spring:
   application:
     name: digital-chief-test-case
+springdoc:
+  swagger-ui:
+    operations-sorter: method
