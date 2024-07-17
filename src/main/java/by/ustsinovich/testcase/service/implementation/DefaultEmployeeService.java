@@ -9,20 +9,40 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Default implementation of the EmployeeService interface.
+ */
 @Service
 public class DefaultEmployeeService implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+    /**
+     * Constructor for the DefaultEmployeeService class.
+     *
+     * @param employeeRepository the EmployeeRepository instance
+     */
     public DefaultEmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
+    /**
+     * Returns a list of all employees.
+     *
+     * @return a list of Employee objects
+     */
     @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
+    /**
+     * Returns an employee by its ID.
+     *
+     * @param id the ID of the employee to retrieve
+     * @return the Employee object with the specified ID
+     * @throws EmployeeNotFoundException if the employee is not found
+     */
     @Override
     public Employee getEmployeeById(Long id) {
         return employeeRepository
@@ -30,12 +50,26 @@ public class DefaultEmployeeService implements EmployeeService {
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
+    /**
+     * Creates a new employee.
+     *
+     * @param employee the Employee object to create
+     * @return the created Employee object
+     */
     @Override
     @Transactional
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
+    /**
+     * Updates an existing employee.
+     *
+     * @param id         the ID of the employee to update
+     * @param newEmployee the updated Employee object
+     * @return the updated Employee object
+     * @throws EmployeeNotFoundException if the employee is not found
+     */
     @Override
     @Transactional
     public Employee updateEmployee(Long id, Employee newEmployee) {
@@ -53,6 +87,12 @@ public class DefaultEmployeeService implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    /**
+     * Deletes an employee by its ID.
+     *
+     * @param id the ID of the employee to delete
+     * @throws EmployeeNotFoundException if the employee is not found
+     */
     @Override
     @Transactional
     public void deleteEmployee(Long id) {
@@ -63,11 +103,22 @@ public class DefaultEmployeeService implements EmployeeService {
         employeeRepository.delete(employee);
     }
 
+    /**
+     * Returns a list of employees by their IDs.
+     *
+     * @param ids the IDs of the employees to retrieve
+     * @return a list of Employee objects
+     */
     @Override
     public List<Employee> getEmployeesByIds(List<Long> ids) {
         return employeeRepository.findAllById(ids);
     }
 
+    /**
+     * Creates multiple employees at once.
+     *
+     * @param employees the list of Employee objects to create
+     */
     @Override
     @Transactional
     public void createAllEmployees(List<Employee> employees) {
