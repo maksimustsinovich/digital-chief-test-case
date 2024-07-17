@@ -57,6 +57,8 @@ Interaction with the application is performed using REST API.
 
 **API documentation is available here: localhost:8080/swagger-ui/index.html**
 
+**Postman collection available here: postman/postman.json. Please import it to test**
+
 ## Used technologies
 
 - Java 17
@@ -69,3 +71,21 @@ Interaction with the application is performed using REST API.
 - Maven
 - PostgreSQL
 - Git
+- Postman
+
+## Usage
+
+* Execute `sql/create-tables.sql` queries
+* Write the database access information in the application.yml file.
+```yaml
+spring:
+  application:
+    name: digital-chief-test-case
+  datasource:
+    url: # your db url
+    username: # your db username
+    password: # your db password
+    driver-class-name: org.postgresql.Driver
+```
+* Execute `mvn spring-boot:run`
+
