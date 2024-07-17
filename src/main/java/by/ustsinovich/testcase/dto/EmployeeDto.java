@@ -21,6 +21,7 @@ public class EmployeeDto {
     private String jobTitle;
 
     @JsonBackReference
+    @Schema(description = "Department the employee belongs to")
     private DepartmentDto department;
 
     public Long getId() {

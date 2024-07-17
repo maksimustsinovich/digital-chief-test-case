@@ -17,6 +17,7 @@ public class DepartmentDto {
     private String name;
 
     @JsonManagedReference
+    @Schema(description = "List of employees in the department")
     private List<EmployeeDto> employees;
 
     public Long getId() {
