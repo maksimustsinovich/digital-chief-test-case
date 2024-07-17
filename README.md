@@ -55,12 +55,15 @@ Interaction with the application is performed using REST API.
     * `POST /departments/{departmentId}/employees` - Add an employees to a department
     * `DELETE /departments/{departmentId/employees/{employeeId}` - Remove an employee from a department
 
+**API documentation is available here: localhost:8080/swagger-ui/index.html**
+
 ## Used technologies
 
 - Java 17
 - Spring Boot 3.3.1
   - Spring Data JPA
   - Spring Web
+- Swagger
 - Hibernate
 - Maven
 - PostgreSQL
