@@ -72,4 +72,15 @@ public class Department {
         this.employees = employees;
     }
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", employees=" + employees.size() + " employees" +
+                '}';
+    }
+
 }

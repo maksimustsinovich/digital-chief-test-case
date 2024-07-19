@@ -108,4 +108,18 @@ public class Employee {
         this.department = department;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", department=" + (department != null ? department.getName() : "null") +
+                '}';
+    }
+
 }
