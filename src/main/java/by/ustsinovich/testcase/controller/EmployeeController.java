@@ -8,10 +8,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
@@ -35,12 +34,18 @@ public class EmployeeController {
             description = "Employees retrieved successfully")
     @ApiResponse(responseCode = "404",
             description = "No employees found")
-    public List<EmployeeDto> retrieveAllEmployees() {
+    public Page<EmployeeDto> retrieveAllEmployees(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String patronymic
+    ) {
         return employeeService
-                .getAllEmployees()
-                .stream()
-                .map(employeeMapper::map)
-                .toList();
+                .getAllEmployees(page, size, firstName, lastName, patronymic, email, phone)
+                .map(employeeMapper::map);
     }
 
     @GetMapping("/{id}")
