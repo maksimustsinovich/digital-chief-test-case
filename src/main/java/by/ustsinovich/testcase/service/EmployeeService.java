@@ -1,12 +1,15 @@
 package by.ustsinovich.testcase.service;
 
+import by.ustsinovich.testcase.entity.Department;
 import by.ustsinovich.testcase.entity.Employee;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getAllEmployees();
+    Page<Employee> getAllEmployees(int page, int size,
+                                   String firstName, String lastName, String patronymic, String email, String phone);
 
     Employee getEmployeeById(Long id);
 
@@ -19,5 +22,9 @@ public interface EmployeeService {
     List<Employee> getEmployeesByIds(List<Long> ids);
 
     void createAllEmployees(List<Employee> employees);
+
+    Page<Employee> getEmployeesByDepartmentAndFilters(Department department, int page, int size,
+                                                      String firstName, String lastName,
+                                                      String email, String phone, String patronymic);
 
 }
