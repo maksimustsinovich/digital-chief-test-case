@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,12 +42,15 @@ public class DepartmentController {
             description = "Departments retrieved successfully")
     @ApiResponse(responseCode = "404",
             description = "No departments found")
-    public List<DepartmentDto> retrieveAllDepartments() {
+    public Page<DepartmentDto> retrieveAllDepartments(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String location
+    ) {
         return departmentService
-                .getAllDepartments()
-                .stream()
-                .map(departmentMapper::map)
-                .toList();
+                .getAllDepartments(page, size, name, location)
+                .map(departmentMapper::map);
     }
 
     @GetMapping("/{id}")
@@ -102,11 +106,19 @@ public class DepartmentController {
             description = "Employees retrieved successfully")
     @ApiResponse(responseCode = "404",
             description = "No employees found")
-    public List<EmployeeDto> retrieveEmployeesByDepartmentId(@PathVariable Long departmentId) {
-        return departmentService.getEmployeesByDepartmentId(departmentId)
-                .stream()
-                .map(employeeMapper::map)
-                .toList();
+    public Page<EmployeeDto> retrieveEmployeesByDepartmentId(
+            @PathVariable Long departmentId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String patronymic
+    ) {
+        return departmentService
+                .getEmployeesByDepartmentId(departmentId, page, size, firstName, lastName, email, phone, patronymic)
+                .map(employeeMapper::map);
     }
 
     @PostMapping("/{departmentId}/employees")

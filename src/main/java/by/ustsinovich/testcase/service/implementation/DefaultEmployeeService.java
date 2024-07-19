@@ -1,5 +1,6 @@
 package by.ustsinovich.testcase.service.implementation;
 
+import by.ustsinovich.testcase.entity.Department;
 import by.ustsinovich.testcase.entity.Employee;
 import by.ustsinovich.testcase.exception.EmployeeNotFoundException;
 import by.ustsinovich.testcase.repository.EmployeeRepository;
@@ -157,6 +158,30 @@ public class DefaultEmployeeService implements EmployeeService {
         LOGGER.info("Creating multiple employees: {}", employees);
         employeeRepository.saveAll(employees);
         LOGGER.info("Employees created successfully");
+    }
+
+    @Override
+    public Page<Employee> getEmployeesByDepartmentAndFilters(
+            Department department, int page, int size, String firstName, String lastName,
+            String email, String phone, String patronymic) {
+        LOGGER.info("Getting all employees with filters: " +
+                        "department={} page={}, size={}, firstName={}, lastName={}, patronymic={}, email={}, phone={}",
+                department, page, size, firstName, lastName, patronymic, email, phone);
+
+        Pageable pageable = PageRequest.of(page, size);
+        Specification<Employee> specification = EmployeeSpecification.filterBy(
+                firstName,
+                lastName,
+                patronymic,
+                email,
+                phone
+        );
+
+        specification = specification.and(
+                (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("department"), department)
+        );
+
+        return employeeRepository.findAll(specification, pageable);
     }
 
 }
