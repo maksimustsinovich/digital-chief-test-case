@@ -28,8 +28,11 @@ public class DepartmentController {
     private final EmployeeMapper employeeMapper;
 
     @Autowired
-    public DepartmentController(DepartmentService departmentService, DepartmentMapper departmentMapper,
-                                EmployeeMapper employeeMapper) {
+    public DepartmentController(
+            DepartmentService departmentService,
+            DepartmentMapper departmentMapper,
+            EmployeeMapper employeeMapper
+    ) {
         this.departmentService = departmentService;
         this.departmentMapper = departmentMapper;
         this.employeeMapper = employeeMapper;
@@ -61,7 +64,8 @@ public class DepartmentController {
     @ApiResponse(responseCode = "404",
             description = "Department not found")
     public DepartmentDto retrieveDepartmentById(@PathVariable Long id) {
-        return departmentMapper.map(departmentService.getDepartmentById(id));
+        return departmentMapper
+                .map(departmentService.getDepartmentById(id));
     }
 
     @PostMapping
@@ -73,7 +77,8 @@ public class DepartmentController {
             description = "Invalid department data")
     @ResponseStatus(HttpStatus.CREATED)
     public DepartmentDto createDepartment(@RequestBody @Valid DepartmentDto departmentDto) {
-        return departmentMapper.map(departmentService.createDepartment(departmentMapper.map(departmentDto)));
+        return departmentMapper
+                .map(departmentService.createDepartment(departmentMapper.map(departmentDto)));
     }
 
     @PutMapping("/{id}")
@@ -84,7 +89,8 @@ public class DepartmentController {
     @ApiResponse(responseCode = "404",
             description = "Department not found")
     public DepartmentDto updateDepartment(@PathVariable Long id, @RequestBody @Valid DepartmentDto departmentDto) {
-        return departmentMapper.map(departmentService.updateDepartment(id, departmentMapper.map(departmentDto)));
+        return departmentMapper
+                .map(departmentService.updateDepartment(id, departmentMapper.map(departmentDto)));
     }
 
     @DeleteMapping("/{id}")
@@ -96,7 +102,8 @@ public class DepartmentController {
             description = "Department not found")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDepartment(@PathVariable Long id) {
-        departmentService.deleteDepartment(id);
+        departmentService
+                .deleteDepartment(id);
     }
 
     @GetMapping("/{departmentId}/employees")
@@ -129,7 +136,8 @@ public class DepartmentController {
     @ApiResponse(responseCode = "404",
             description = "Department not found")
     public DepartmentDto addEmployeeToDepartments(@PathVariable Long departmentId, @RequestBody List<Long> employees) {
-        return departmentMapper.map(departmentService.addEmployeeToDepartment(departmentId, employees));
+        return departmentMapper
+                .map(departmentService.addEmployeeToDepartment(departmentId, employees));
     }
 
     @DeleteMapping("/{departmentId}/employees/{employeeId}")
@@ -140,7 +148,8 @@ public class DepartmentController {
     @ApiResponse(responseCode = "404",
             description = "Department or employee not found")
     public DepartmentDto removeEmployeeFromDepartment(@PathVariable Long departmentId, @PathVariable Long employeeId) {
-        return departmentMapper.map(departmentService.removeEmployeeFromDepartment(departmentId, employeeId));
+        return departmentMapper
+                .map(departmentService.removeEmployeeFromDepartment(departmentId, employeeId));
     }
 
 }

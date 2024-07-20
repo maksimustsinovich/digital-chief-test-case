@@ -135,28 +135,34 @@ public class DefaultDepartmentService implements DepartmentService {
      * Returns a list of employees belonging to a department.
      *
      * @param departmentId the ID of the department
-     * @param page
-     * @param size
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param phone
-     * @param patronymic
      * @return a list of Employee objects
      * @throws DepartmentNotFoundException if the department is not found
      */
     @Override
-    public Page<Employee> getEmployeesByDepartmentId(Long departmentId, int page, int size,
-                                                     String firstName, String lastName, String email,
-                                                     String phone, String patronymic) {
+    public Page<Employee> getEmployeesByDepartmentId(
+            Long departmentId,
+            int page,
+            int size,
+            String firstName,
+            String lastName,
+            String email,
+            String phone,
+            String patronymic
+    ) {
         LOGGER.info("Getting employees by department id: {}", departmentId);
         Department department = departmentRepository
                 .findById(departmentId)
                 .orElseThrow(() -> new DepartmentNotFoundException(departmentId));
 
         return employeeService.getEmployeesByDepartmentAndFilters(
-                department, page, size, firstName, lastName,
-                email, phone, patronymic
+                department,
+                page,
+                size,
+                firstName,
+                lastName,
+                email,
+                phone,
+                patronymic
         );
     }
 

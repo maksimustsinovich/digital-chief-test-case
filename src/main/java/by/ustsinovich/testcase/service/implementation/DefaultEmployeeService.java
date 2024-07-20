@@ -44,8 +44,15 @@ public class DefaultEmployeeService implements EmployeeService {
      * @return a list of Employee objects
      */
     @Override
-    public Page<Employee> getAllEmployees(int page, int size, String firstName, String lastName, String patronymic,
-                                          String email, String phone) {
+    public Page<Employee> getAllEmployees(
+            int page,
+            int size,
+            String firstName,
+            String lastName,
+            String patronymic,
+            String email,
+            String phone
+    ) {
         LOGGER.info("Getting all employees with filters: " +
                         "page={}, size={}, firstName={}, lastName={}, patronymic={}, email={}, phone={}",
                 page, size, firstName, lastName, patronymic, email, phone);
@@ -59,7 +66,8 @@ public class DefaultEmployeeService implements EmployeeService {
                 phone
         );
 
-        return employeeRepository.findAll(specification, pageable);
+        return employeeRepository
+                .findAll(specification, pageable);
     }
 
     /**
@@ -162,8 +170,15 @@ public class DefaultEmployeeService implements EmployeeService {
 
     @Override
     public Page<Employee> getEmployeesByDepartmentAndFilters(
-            Department department, int page, int size, String firstName, String lastName,
-            String email, String phone, String patronymic) {
+            Department department,
+            int page,
+            int size,
+            String firstName,
+            String lastName,
+            String email,
+            String phone,
+            String patronymic
+    ) {
         LOGGER.info("Getting all employees with filters: " +
                         "department={} page={}, size={}, firstName={}, lastName={}, patronymic={}, email={}, phone={}",
                 department, page, size, firstName, lastName, patronymic, email, phone);

@@ -22,7 +22,10 @@ public class EmployeeController {
     private final EmployeeMapper employeeMapper;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, EmployeeMapper employeeMapper) {
+    public EmployeeController(
+            EmployeeService employeeService,
+            EmployeeMapper employeeMapper
+    ) {
         this.employeeService = employeeService;
         this.employeeMapper = employeeMapper;
     }
@@ -56,7 +59,8 @@ public class EmployeeController {
     @ApiResponse(responseCode = "404",
             description = "Employee not found")
     public EmployeeDto retrieveEmployeeById(@PathVariable Long id) {
-        return employeeMapper.map(employeeService.getEmployeeById(id));
+        return employeeMapper
+                .map(employeeService.getEmployeeById(id));
     }
 
     @PostMapping
@@ -68,7 +72,8 @@ public class EmployeeController {
             description = "Invalid employee data")
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeDto createEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
-        return employeeMapper.map(employeeService.createEmployee(employeeMapper.map(employeeDto)));
+        return employeeMapper
+                .map(employeeService.createEmployee(employeeMapper.map(employeeDto)));
     }
 
     @PutMapping("/{id}")
@@ -79,7 +84,8 @@ public class EmployeeController {
     @ApiResponse(responseCode = "404",
             description = "Employee not found")
     public EmployeeDto updateEmployee(@PathVariable Long id, @RequestBody @Valid EmployeeDto employeeDto) {
-        return employeeMapper.map(employeeService.updateEmployee(id, employeeMapper.map(employeeDto)));
+        return employeeMapper
+                .map(employeeService.updateEmployee(id, employeeMapper.map(employeeDto)));
     }
 
     @DeleteMapping("/{id}")
@@ -91,7 +97,8 @@ public class EmployeeController {
             description = "Employee not found")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
+        employeeService
+                .deleteEmployee(id);
     }
 
 }
