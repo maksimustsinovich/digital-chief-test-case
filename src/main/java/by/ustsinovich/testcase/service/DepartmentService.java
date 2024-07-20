@@ -18,9 +18,16 @@ public interface DepartmentService {
 
     void deleteDepartment(Long id);
 
-    Page<Employee> getEmployeesByDepartmentId(Long departmentId, int page, int size,
-                                              String firstName, String lastName,
-                                              String email, String phone, String patronymic);
+    Page<Employee> getEmployeesByDepartmentId(
+            Long departmentId,
+            int page,
+            int size,
+            String firstName,
+            String lastName,
+            String email,
+            String phone,
+            String patronymic
+    );
 
     Department addEmployeeToDepartment(Long departmentId, List<Long> employeesId);
 

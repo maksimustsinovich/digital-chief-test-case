@@ -13,7 +13,10 @@ public class DepartmentSpecification {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Specification<Department> filterBy(String name, String location) {
+    public static Specification<Department> filterBy(
+            String name,
+            String location
+    ) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

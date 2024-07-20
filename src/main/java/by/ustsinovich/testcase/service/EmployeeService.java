@@ -8,8 +8,15 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    Page<Employee> getAllEmployees(int page, int size,
-                                   String firstName, String lastName, String patronymic, String email, String phone);
+    Page<Employee> getAllEmployees(
+            int page,
+            int size,
+            String firstName,
+            String lastName,
+            String patronymic,
+            String email,
+            String phone
+    );
 
     Employee getEmployeeById(Long id);
 
@@ -23,8 +30,15 @@ public interface EmployeeService {
 
     void createAllEmployees(List<Employee> employees);
 
-    Page<Employee> getEmployeesByDepartmentAndFilters(Department department, int page, int size,
-                                                      String firstName, String lastName,
-                                                      String email, String phone, String patronymic);
+    Page<Employee> getEmployeesByDepartmentAndFilters(
+            Department department,
+            int page,
+            int size,
+            String firstName,
+            String lastName,
+            String email,
+            String phone,
+            String patronymic
+    );
 
 }

@@ -13,8 +13,13 @@ public class EmployeeSpecification {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Specification<Employee> filterBy(String firstName, String lastName, String patronymic,
-                                                   String email, String phone) {
+    public static Specification<Employee> filterBy(
+            String firstName,
+            String lastName,
+            String patronymic,
+            String email,
+            String phone
+    ) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
